@@ -1,0 +1,5 @@
+docs/*.log
+*.aux
+*.backup
+*.a
+

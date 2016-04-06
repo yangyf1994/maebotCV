@@ -1,0 +1,12 @@
+struct maebot_camera_data_t
+{
+	int64_t utime;
+
+	int32_t width;
+	int32_t height;
+	string format;
+
+	int32_t datalen;
+	int32_t data[datalen];
+
+}
