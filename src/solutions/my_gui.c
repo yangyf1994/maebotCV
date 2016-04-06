@@ -55,12 +55,12 @@ struct state {
 
     pthread_mutex_t camera_mutex;
     bool cleanup_data;
-    image_source_t camera_source;
+    image_source_data_t camera_source;
     // for accessing the arrays
     pthread_mutex_t mutex;
 };
 
- staet_t *state_global;
+ state_t *state_global;
 
 // === Parameter listener =================================================
 // This function is handed to the parameter gui (via a parameter listener)
@@ -143,7 +143,7 @@ image_handler(const lcm_recv_buf_t *rbuf, const char * channel,
 void *
 receive_thread(void* state_in){
 
-	state_t * state = state_in;
+	 
 	lcm_t * lcm = lcm_create(NULL);
 	if(!lcm){
 		printf("\terror starting lcm\n");
@@ -152,7 +152,7 @@ receive_thread(void* state_in){
  maebot_camera_data_t_subscribe(lcm, "CAMERA_DATA", &image_handler, NULL);
 
  while(1){
- 	lcm_handle_lcm();
+ 	lcm_handle(lcm);
  }
 
  lcm_destroy(lcm);
@@ -240,8 +240,7 @@ animate_thread (void *data)
         usleep (1000000/fps);
     }
 
-    if (isrc != NULL)
-        isrc->stop (isrc);
+ 
 
     return NULL;
 }

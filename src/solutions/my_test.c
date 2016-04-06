@@ -4,7 +4,7 @@
 
 #include "common/zarray.h"
 
-#include "image_source.h"
+#include "../imagesource/image_source.h"
 #include <lcm/lcm.h>
 #include "../lcmtypes/maebot_camera_data_t.h"
 
@@ -82,7 +82,7 @@ main (int argc, char *argv[])
         cam_data.datalen = frmd->datalen;
         cam_data.data = calloc(frmd->datalen, sizeof(uint32_t));
         memcpy(cam_data.data, frmd->data, frmd->datalen);
-        exlcm_example_t_publish(lcm, "CAMERA_DATA", &cam_data);
+        maebot_camera_data_t_publish(lcm, "CAMERA_DATA", &cam_data);
 
         printf ("get_frame: res = %d count = %10d (%10d bytes)\r",
                 res, nframes, frmd->datalen);
